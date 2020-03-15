@@ -34,3 +34,9 @@
 	-moz-box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
 	box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
 }
+
+.giftcardBtn {
+	background-color: none;
+	border: none;
+	cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/Giftcard.css';
+import './Giftcard.css';
 
 class Giftcard extends React.Component {
 	constructor(props) {
@@ -21,8 +21,10 @@ class Giftcard extends React.Component {
 
 	render() {
 		return (
-			<div class="giftcardContainer">
-				<img src={this.state.data.image} className="giftcardImg" onClick={this.onClick} alt={this.state.data.brand}/>
+			<div className="giftcardContainer">
+				<button className="giftcardBtn">
+					<img src={this.state.data.image} className="giftcardImg" onClick={this.onClick} alt={this.state.data.brand}/>
+				</button>
 				<p>{this.state.data.brand}</p>
 			</div>
 		)

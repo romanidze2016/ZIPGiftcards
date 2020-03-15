@@ -1,9 +1,9 @@
 import React from 'react';
-import '../css/Giftcard.css';
+import './Giftcard.css';
 import Giftcard from './Giftcard';
 
 
-class GiftcardList extends React.Component {
+class GiftcardApp extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
@@ -55,7 +55,7 @@ class GiftcardList extends React.Component {
 		);
 		if (searchResult.length > 0) {
 			result = (
-				<div class="giftcardGrid">
+				<div className="giftcardGrid">
 					{giftcards.filter(giftcard => searchResult.includes(giftcard.id)).map((giftcard) => {
 						return (
 							<Giftcard key={giftcard.id} giftcardData={giftcard}/>
@@ -78,7 +78,7 @@ class GiftcardList extends React.Component {
 		return(
 			<div>
 				<h2>Featured cards</h2>
-				<div class="giftcardGrid">
+				<div className="giftcardGrid">
 					{giftcards.map((giftcard) => (
 		            	<Giftcard key={giftcard.id} giftcardData={giftcard}/>
 		            ))}
@@ -98,4 +98,4 @@ class GiftcardList extends React.Component {
 		)
 	}
 }
-export default GiftcardList;
+export default GiftcardApp;
