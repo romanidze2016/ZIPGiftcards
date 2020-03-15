@@ -1,0 +1,15 @@
+.GiftcardList {
+  text-align: center;
+  font-family: Rubik,sans-serif;
+  color: #22285e;
+  font-size: 22px;
+  padding: 20px;
+  /*display: grid;
+  grid-template-columns: auto auto auto;*/
+}
+
+.searchBar {
+	width: 90%;
+	padding: 10px;
+	margin: 20px;
+}
