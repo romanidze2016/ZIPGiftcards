@@ -55,7 +55,7 @@ class GiftcardList extends React.Component {
 		);
 		if (searchResult.length > 0) {
 			result = (
-				<div>
+				<div class="giftcardGrid">
 					{giftcards.filter(giftcard => searchResult.includes(giftcard.id)).map((giftcard) => {
 						return (
 							<Giftcard key={giftcard.id} giftcardData={giftcard}/>
@@ -78,9 +78,11 @@ class GiftcardList extends React.Component {
 		return(
 			<div>
 				<h2>Featured cards</h2>
-				{giftcards.map((giftcard) => (
-	            	<Giftcard key={giftcard.id} giftcardData={giftcard}/>
-	            ))}
+				<div class="giftcardGrid">
+					{giftcards.map((giftcard) => (
+		            	<Giftcard key={giftcard.id} giftcardData={giftcard}/>
+		            ))}
+	            </div>
             </div>
 		);
 	}

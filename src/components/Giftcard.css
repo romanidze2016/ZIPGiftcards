@@ -1,13 +1,14 @@
 .giftcardImg {
-    width:450px; 
-    height:300px;
+    width:350px; 
+    height:230px;
     border-radius: 25px;
     -webkit-box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
 	-moz-box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
 	box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
 }
 
-/*div {
-	float: left;
-	display: block;
-}*/
+.giftcardContainer {
+	padding: 20px;
+	text-align: center;
+	font-size: 16px;
+}
