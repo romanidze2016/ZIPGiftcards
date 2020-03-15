@@ -8,7 +8,7 @@ class GiftcardList extends React.Component {
 	    super(props);
 	    this.state = {
 	    	giftcards: [],
-	    	searchLoaded: false,
+	    	displaySearch: false,
 	    	searchResult: [],
 	    }
 	    this.handleSearch = this.handleSearch.bind(this);
@@ -29,31 +29,44 @@ class GiftcardList extends React.Component {
 			.then(res => res.json())
 			.then((data) => {
 				this.setState({
-					searchLoaded: true,
+					displaySearch: true,
 					searchResult: data.map(item => item._source.id),
 				});
 			})
 			.catch(console.log);
 		} else {
 			this.setState({
-				searchLoaded: false,
+				displaySearch: false,
 				searchResult: [],
 			});
 		}
 	}
 
 	renderSearchResult() {
-		const { giftcards, searchLoaded, searchResult } = this.state;
+		const { giftcards, displaySearch, searchResult } = this.state;
 
-		if (searchLoaded) {
-			return (
+		let result = (
+			<div>
+				<p>No results</p>
+			</div>
+		);
+		if (searchResult.length > 0) {
+			result = (
 				<div>
-					<h2>Search result</h2>
 					{giftcards.filter(giftcard => searchResult.includes(giftcard.id)).map((giftcard) => {
 						return (
 							<Giftcard key={giftcard.id} giftcardData={giftcard}/>
 						);
 					})}
+				</div>
+			);
+		}
+
+		if (displaySearch) {
+			return (
+				<div>
+					<h2>Search result</h2>
+					{result}
 				</div>
 			);
 		}
