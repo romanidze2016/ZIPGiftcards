@@ -1,5 +1,5 @@
 import React from 'react';
-import './Giftcard.css';
+import '../css/Giftcard.css';
 
 class Giftcard extends React.Component {
 	constructor(props) {

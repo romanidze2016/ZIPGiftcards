@@ -1,5 +1,5 @@
 import React from 'react';
-import './GiftcardList.css';
+import '../css/Giftcard.css';
 import Giftcard from './Giftcard';
 
 
@@ -89,7 +89,7 @@ class GiftcardList extends React.Component {
 
 	render() {
 		return (
-			<div className="GiftcardList">
+			<div className="giftcardList">
 				<h1>ZIP Giftcards</h1>
 				<input onChange={this.handleSearch} className="searchBar" type="text" placeholder="Search gift cards" />
 				{this.renderSearchResult()}

@@ -1,0 +1,36 @@
+.giftcardList {
+	text-align: center;
+	font-family: Rubik,sans-serif;
+	color: #22285e;
+	font-size: 20px;
+	padding: 20px;
+	/*display: grid;
+	grid-template-columns: auto auto auto;*/
+}
+
+.searchBar {
+	width: 90%;
+	padding: 10px;
+	margin: 20px;
+}
+
+.giftcardGrid {
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+  	padding: 10px;
+}
+
+.giftcardContainer {
+	padding: 20px;
+	text-align: center;
+	font-size: 16px;
+}
+
+.giftcardImg {
+    width:350px; 
+    height:230px;
+    border-radius: 25px;
+    -webkit-box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
+	-moz-box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
+	box-shadow: 3px 3px 11px -6px rgba(0,0,0,0.82);
+}
