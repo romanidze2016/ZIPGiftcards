@@ -1,5 +1,5 @@
 import React from 'react';
-import './Giftcard.css';
+import './GiftcardApp.css';
 import Giftcard from './Giftcard';
 
 
@@ -97,7 +97,7 @@ class GiftcardApp extends React.Component {
 
 	render() {
 		return (
-			<div className="giftcardList">
+			<div className="giftcardApp">
 				<h1>ZIP Giftcards</h1>
 				<input
 					onChange={(event) => this.searchGiftCards(event.target.value)}
