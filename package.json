@@ -14,8 +14,9 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "REACT_APP_ZIP_API_URL=https://sandbox.zip.co react-scripts start",
+    "build-sandbox": "REACT_APP_ZIP_API_URL=https://sandbox.zip.co react-scripts build",
+    "build-prod": "REACT_APP_ZIP_API_URL=https://zip.co react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

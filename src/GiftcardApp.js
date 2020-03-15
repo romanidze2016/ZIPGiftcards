@@ -18,7 +18,7 @@ class GiftcardApp extends React.Component {
 	}
 
 	fetchGiftCards = () => {
-		let url = `https://zip.co/giftcards/api/giftcards`;
+		let url = `${process.env.REACT_APP_ZIP_API_URL}/giftcards/api/giftcards`;
 
 		fetch(url)
 			.then(res => res.json())
@@ -33,7 +33,7 @@ class GiftcardApp extends React.Component {
 
 	searchGiftCards= (keyword) => {
 		if (keyword !== '') {
-			fetch('https://zip.co/giftcards/api/giftcards/keyword/' + keyword)
+			fetch(`${process.env.REACT_APP_ZIP_API_URL}/giftcards/api/giftcards/keyword/${keyword.toLowerCase()}`)
 			.then(res => res.json())
 			.then((data) => {
 				this.setState({
