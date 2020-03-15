@@ -44,6 +44,9 @@ class GiftcardList extends React.Component {
 
 	renderSearchResult() {
 		const { giftcards, displaySearch, searchResult } = this.state;
+		if (!displaySearch) {
+			return;
+		}
 
 		let result = (
 			<div>
@@ -61,15 +64,12 @@ class GiftcardList extends React.Component {
 				</div>
 			);
 		}
-
-		if (displaySearch) {
-			return (
-				<div>
-					<h2>Search result</h2>
-					{result}
-				</div>
-			);
-		}
+		return (
+			<div>
+				<h2>Search result</h2>
+				{result}
+			</div>
+		);
 	}
 
 	renderAllGiftcards() {
