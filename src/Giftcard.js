@@ -7,23 +7,22 @@ class Giftcard extends React.Component {
 	    this.state = {
 	    	data: props.giftcardData,
 	    };
-	    this.onClick = this.onClick.bind(this);
 	}
 
-	onClick() {
+	showPricing() {
 		const { denominations } = this.state.data;
 		let pricingOptions = "The gift card has the following pricing options:\n";
 		denominations.forEach((denomination) => {
 			pricingOptions += "$" + denomination.price + " " + denomination.currency + "\n";
 		});
-		alert(pricingOptions);
+		return pricingOptions;
 	}
 
 	render() {
 		return (
 			<div className="giftcardContainer">
-				<button className="giftcardBtn">
-					<img src={this.state.data.image} className="giftcardImg" onClick={this.onClick} alt={this.state.data.brand}/>
+				<button className="giftcardBtn" onClick={() => alert(this.showPricing())}>
+					<img src={this.state.data.image} className="giftcardImg" alt={this.state.data.brand}/>
 				</button>
 				<p>{this.state.data.brand}</p>
 			</div>

@@ -6,7 +6,7 @@ import Giftcard from './Giftcard';
 const giftcardJson = {
 	"brand": "Ebay",
 	"image": "https://files.prezzee.com.au/media/sku-theme-designs/ebay-e0cf8e10-4cda-41cb-be86-0f558a76bdbc/ebay.jpg",
-	"denominations": [],
+	"denominations": [{"currency": "AUD", "price": 100}]
 }
 
 it('renders without crashing', () => {
@@ -43,9 +43,9 @@ it('component has correct structure', () => {
 	 `)
 });
 
-// it('alerts pricing options on click', async () => {
-// 	global.alert = jest.fn();
-// 	const { getByRole } = render(<Giftcard giftcardData={giftcardJson} />)
-//   	fireEvent.click(getByRole('button'))
-// 	expect(global.alert).toHaveBeenCalledTimes(1);
-// })
+it('alerts pricing options on click', async () => {
+	global.alert = jest.fn();
+	const { getByRole } = render(<Giftcard giftcardData={giftcardJson} />)
+  	fireEvent.click(getByRole('button'))
+	expect(global.alert).toBeCalledWith("The gift card has the following pricing options:\n$100 AUD\n");
+})

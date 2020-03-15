@@ -11,21 +11,29 @@ class GiftcardApp extends React.Component {
 	    	displaySearch: false,
 	    	searchResult: [],
 	    }
-	    this.handleSearch = this.handleSearch.bind(this);
 	}
 
 	componentDidMount() {
-		fetch('https://zip.co/giftcards/api/giftcards')
-		.then(res => res.json())
-		.then((data) => {
-			this.setState({ giftcards: data })
-		})
-		.catch(console.log)
+		this.fetchGiftCards();
 	}
 
-	handleSearch(e) {
-		if (e.target.value !== '') {
-			fetch('https://zip.co/giftcards/api/giftcards/keyword/' + e.target.value)
+	fetchGiftCards = () => {
+		let url = `https://zip.co/giftcards/api/giftcards`;
+
+		fetch(url)
+			.then(res => res.json())
+			.then((allGiftcards) => {
+				this.allGiftcards = allGiftcards;
+				return this.setState({
+					giftcards: allGiftcards,
+				})
+			})
+			.catch(console.log);
+	}
+
+	searchGiftCards= (keyword) => {
+		if (keyword !== '') {
+			fetch('https://zip.co/giftcards/api/giftcards/keyword/' + keyword)
 			.then(res => res.json())
 			.then((data) => {
 				this.setState({
@@ -91,7 +99,12 @@ class GiftcardApp extends React.Component {
 		return (
 			<div className="giftcardList">
 				<h1>ZIP Giftcards</h1>
-				<input onChange={this.handleSearch} className="searchBar" type="text" placeholder="Search gift cards" />
+				<input
+					onChange={(event) => this.searchGiftCards(event.target.value)}
+					className="searchBar"
+					type="text"
+					placeholder="Search gift cards"
+				/>
 				{this.renderSearchResult()}
 				{this.renderAllGiftcards()}
 			</div>

@@ -14,10 +14,12 @@
 	margin: 20px;
 }
 
-.giftcardGrid {
-	display: grid;
-	grid-template-columns: 33% 33% 33%;
-  	padding: 10px;
+@media screen and (min-width: 600px) {
+	.giftcardGrid {
+		display: grid;
+		grid-template-columns: 33% 33% 33%;
+		padding: 10px;
+	}	
 }
 
 .giftcardContainer {
