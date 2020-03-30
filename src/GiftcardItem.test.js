@@ -1,30 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render } from '@testing-library/react';
-import Giftcard from './Giftcard';
+import GiftcardItem from './GiftcardItem';
 
-const giftcardJson = {
-	"brand": "Ebay",
-	"image": "https://files.prezzee.com.au/media/sku-theme-designs/ebay-e0cf8e10-4cda-41cb-be86-0f558a76bdbc/ebay.jpg",
-	"denominations": [{"currency": "AUD", "price": 100}]
+const giftcardProps = {
+  id: "Ebay",
+  brand: "Ebay",
+  imgSrc: "https://files.prezzee.com.au/media/sku-theme-designs/ebay-e0cf8e10-4cda-41cb-be86-0f558a76bdbc/ebay.jpg",
+  showPricing: () => {},
 }
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Giftcard giftcardData={giftcardJson} />, div);
+  ReactDOM.render(<GiftcardItem {...giftcardProps}/>, div);
 });
 
 it('renders giftcard name', () => {
-  const { getByText } = render(<Giftcard giftcardData={giftcardJson} />);
+  const { getByText } = render(<GiftcardItem {...giftcardProps} />);
   expect(getByText('Ebay')).toBeInTheDocument();
 });
 
 it('component has correct structure', () => {
-	const { container } = render(<Giftcard giftcardData={giftcardJson} />);
+	const { container } = render(<GiftcardItem {...giftcardProps} />);
 	expect(container).toMatchInlineSnapshot(`
      <div>
        <div
          class="giftcardContainer"
+         data-testid="giftcardItem"
        >
          <button
            class="giftcardBtn"
@@ -42,10 +44,3 @@ it('component has correct structure', () => {
      </div>
 	 `)
 });
-
-it('alerts pricing options on click', async () => {
-	global.alert = jest.fn();
-	const { getByRole } = render(<Giftcard giftcardData={giftcardJson} />)
-  	fireEvent.click(getByRole('button'))
-	expect(global.alert).toBeCalledWith("The gift card has the following pricing options:\n$100 AUD\n");
-})

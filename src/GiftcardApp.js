@@ -1,13 +1,14 @@
 import React from 'react';
+import axios from 'axios'
 import './GiftcardApp.css';
-import Giftcard from './Giftcard';
+import GiftcardItem from './GiftcardItem';
 
 
 class GiftcardApp extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-	    	giftcards: [],
+				giftcardDataById: {},
 	    	displaySearch: false,
 	    	searchResult: [],
 	    }
@@ -17,24 +18,24 @@ class GiftcardApp extends React.Component {
 		this.fetchGiftCards();
 	}
 
-	fetchGiftCards = () => {
-		let url = `${process.env.REACT_APP_ZIP_API_URL}/giftcards/api/giftcards`;
-
-		fetch(url)
-			.then(res => res.json())
-			.then((allGiftcards) => {
-				this.allGiftcards = allGiftcards;
-				return this.setState({
-					giftcards: allGiftcards,
+	fetchGiftCards = async () => {
+		await axios.get(`${process.env.REACT_APP_ZIP_API_URL}/giftcards/api/giftcards`)
+			.then(res => res.data)
+			.then((giftcardData) => {
+				this.setState({
+					giftcardDataById: giftcardData.reduce(function(map, giftcard) {
+						map[giftcard.id] = giftcard;
+						return map;
+					}, {}),
 				})
 			})
 			.catch(console.log);
 	}
 
-	searchGiftCards= (keyword) => {
+	searchGiftCards = async (keyword) => {
 		if (keyword !== '') {
-			fetch(`${process.env.REACT_APP_ZIP_API_URL}/giftcards/api/giftcards/keyword/${keyword.toLowerCase()}`)
-			.then(res => res.json())
+			axios.get(`${process.env.REACT_APP_ZIP_API_URL}/giftcards/api/giftcards/keyword/${keyword.toLowerCase()}`)
+			.then(res => res.data)
 			.then((data) => {
 				this.setState({
 					displaySearch: true,
@@ -50,8 +51,19 @@ class GiftcardApp extends React.Component {
 		}
 	}
 
+	showPricing = (id) => {
+		const { giftcardDataById } = this.state;
+
+		let pricingOptions = "The gift card has the following pricing options:\n";
+		giftcardDataById[id].denominations.forEach((denomination) => {
+			pricingOptions += "$" + denomination.price + " " + denomination.currency + "\n";
+		});
+
+		return pricingOptions;
+	}
+
 	renderSearchResult() {
-		const { giftcards, displaySearch, searchResult } = this.state;
+		const { displaySearch, searchResult, giftcardDataById } = this.state;
 		if (!displaySearch) {
 			return;
 		}
@@ -64,9 +76,15 @@ class GiftcardApp extends React.Component {
 		if (searchResult.length > 0) {
 			result = (
 				<div className="giftcardGrid">
-					{giftcards.filter(giftcard => searchResult.includes(giftcard.id)).map((giftcard) => {
+					{searchResult.map((id) => {
 						return (
-							<Giftcard key={giftcard.id} giftcardData={giftcard}/>
+							<GiftcardItem
+								key={id}
+								id={id}
+								imgSrc={giftcardDataById[id].image}
+								brand={giftcardDataById[id].brand}
+								showPricing={(key) => alert(this.showPricing(key))}
+							/>
 						);
 					})}
 				</div>
@@ -81,17 +99,25 @@ class GiftcardApp extends React.Component {
 	}
 
 	renderAllGiftcards() {
-		const { giftcards } = this.state;
+		const { giftcardDataById } = this.state;
 
 		return(
 			<div>
 				<h2>Featured cards</h2>
 				<div className="giftcardGrid">
-					{giftcards.map((giftcard) => (
-		            	<Giftcard key={giftcard.id} giftcardData={giftcard}/>
-		            ))}
-	            </div>
-            </div>
+					{Object.keys(giftcardDataById).map((key) => {
+						return(
+							<GiftcardItem
+								key={key}
+								id={giftcardDataById[key].id}
+								imgSrc={giftcardDataById[key].image}
+								brand={giftcardDataById[key].brand}
+								showPricing={(id) => alert(this.showPricing(id))}
+							/>
+						);
+					})}
+				</div>
+      </div>
 		);
 	}
 
